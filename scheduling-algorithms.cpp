@@ -98,8 +98,7 @@ void sjf(vector<Process> &processes, int n)
         if (a.arrivalTime == b.arrivalTime) {
             return a.burstTime < b.burstTime;
         }
-        return a.arrivalTime < b.arrivalTime; }
-        );
+        return a.arrivalTime < b.arrivalTime; });
 
     // Loop until all processes are completed
     while (completed < n)
@@ -321,27 +320,37 @@ void roundRobin(vector<Process> &processes, int n, int quantum)
     }
 }
 
-int main()
+vector<Process> processDetails()
 {
-    int quantum = 2;
-    // Input the details of each process
-    vector<Process> processes{
+    return {
         {Process{1, 0, 6, 4, 6, 0, 0}},
         {Process{2, 1, 8, 2, 8, 0, 0}},
         {Process{3, 2, 7, 1, 7, 0, 0}},
         {Process{4, 3, 3, 3, 3, 0, 0}}};
+}
+
+int main()
+{
+    int quantum = 2;
+    // Input the details of each process
+    vector<Process> processes = processDetails();
 
     int n = processes.size();
 
     // Call the scheduling algorithms
     cout << "fcfs" << endl;
     fcfs(processes, n);
+
+    processes = processDetails();
     cout << "sjf" << endl;
     sjf(processes, n);
+    processes = processDetails();
     cout << "priorityPreemptive" << endl;
     priorityPreemptive(processes, n);
+    processes = processDetails();
     cout << "priorityNonPreemptive" << endl;
     priorityNonPreemptive(processes, n);
+    processes = processDetails();
     cout << "roundRobin" << endl;
     roundRobin(processes, n, quantum);
 
